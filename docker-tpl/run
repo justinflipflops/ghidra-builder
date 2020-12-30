@@ -5,10 +5,11 @@ start_dir="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
 build_command="${@:1}"
 image=dukebarman/ghidra-builder
 
-docker run \
+podman run \
     -it \
     -v $PWD:/files \
     -w /files \
+    --privileged \
     --user dockerbot:dockerbot \
     --rm $image \
     sh -c "$build_command"
